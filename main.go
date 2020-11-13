@@ -190,14 +190,94 @@ func main() {
 	//)
 
 	//枚举，用其他方式替代
+	//fmt.Printf("%s  %d",CPU,CPU)
+	//fmt.Printf("%s  %d",GPU,GPU)
 
-	//类型别名 Type Alias
-	var a newInt
-	fmt.Printf("a type: %T\n", a)
+	////类型别名 Type Alias
+	//var a newInt
+	//fmt.Printf("a type: %T\n", a)
+	//
+	//var a2 intAlias
+	//fmt.Printf("a2 type: %T\n", a2)
 
-	var a2 intAlias
-	fmt.Printf("a2 type: %T\n", a2)
+	////在结构体成员嵌入时使用别名
+	//var a Vehicle
+	//a.FakeBrand.show()
+	//ta := reflect.TypeOf(a)
+	//for i := 0; i < ta.NumField(); i++ {
+	//	f := ta.Field(i)
+	//	fmt.Println("FieldName :  %v, FieldType: %v\n",f.Name,f.Type.Name())
+	//}
 
+	////数组
+	//var team = [3]int{1,2,3}
+	//for i := 0; i < len(team); i++ {
+	//	fmt.Println(team)
+	//}
+
+	//切片复制元素
+	const elementCount = 1000
+	srcData := make([]int, elementCount)
+
+	//将切片赋值
+	for i := 0; i < elementCount; i++ {
+		srcData[i] = i
+	}
+
+	////引用切片数据,复制切片数据
+	//refData := srcData
+	//
+	//copyData := make([]int,elementCount)
+	//
+	//copy(copyData,srcData)
+	//
+	//srcData[0] = 999
+	//
+	//fmt.Println(refData[0])
+	//
+	//fmt.Println(copyData[0],copyData[elementCount-1])
+	//
+	//copy(copyData,srcData[4:6])
+	//
+	//for i := 0; i < 5; i++ {
+	//	fmt.Printf("%d",copyData[i])
+	//}
+
+}
+
+//在结构体成员嵌入时使用别名
+type Brand struct {
+}
+
+func (a Brand) show() {
+}
+
+type FakeBrand = Brand
+
+type Vehicle struct {
+	FakeBrand
+	Brand
+}
+
+//枚举，用其他方式替代
+type ChipType int
+
+const (
+	None ChipType = iota
+	CPU
+	GPU
+)
+
+func (c ChipType) String() string {
+	switch c {
+	case None:
+		return "None"
+	case CPU:
+		return "CPU"
+	case GPU:
+		return "GPU"
+	}
+	return "N/A"
 }
 
 type newInt int
