@@ -215,14 +215,14 @@ func main() {
 	//	fmt.Println(team)
 	//}
 
-	//切片复制元素
-	const elementCount = 1000
-	srcData := make([]int, elementCount)
-
-	//将切片赋值
-	for i := 0; i < elementCount; i++ {
-		srcData[i] = i
-	}
+	////切片复制元素
+	//const elementCount = 1000
+	//srcData := make([]int, elementCount)
+	//
+	////将切片赋值
+	//for i := 0; i < elementCount; i++ {
+	//	srcData[i] = i
+	//}
 
 	////引用切片数据,复制切片数据
 	//refData := srcData
@@ -242,6 +242,173 @@ func main() {
 	//for i := 0; i < 5; i++ {
 	//	fmt.Printf("%d",copyData[i])
 	//}
+
+	////99乘法表
+	//chengfa99biao()
+
+	////遍历字符串
+	//str:= "无名以观其妙，有名以观其徼"
+	//for key,value := range str{
+	//	fmt.Printf("key: %d  value : 0x%x\n  ",key,value)
+	//}
+
+	////遍历Map 获得map中的键和值
+	//m := map[string]int{
+	//	"hello": 100,
+	//	"world": 200,
+	//}
+	////改版map的值
+	//m["every"] = 300
+	//m["hello"] = 0
+	//for k,v:=range m{
+	//	fmt.Println(k,v)
+	//}
+
+	////遍历通道
+	//c := make(chan int)
+	//go func() {
+	//	c <- 1
+	//	c <- 2
+	//	c <- 3
+	//	close(c)
+	//}()
+	//
+	//for i:= range c{
+	//	fmt.Println(i)
+	//}
+
+	//switch
+	////一分支多值
+	//a := "daddy"
+	//switch a {
+	//case "mum","daddy":
+	//	fmt.Println("family!")
+	//}
+	////分支表达式
+	//r := 11
+	//switch {
+	//case r > 10 && r < 20:
+	//	fmt.Println(r)
+	//}
+	////case使用fallthrough
+	//s := "hello"
+	//switch  {
+	//case s == "hello":
+	//	fmt.Println("hello")
+	//	fallthrough
+	//case s != "world":
+	//	fmt.Println("world")
+	//}
+
+	////跳转到指定代码标签（goto）
+	//var breakAgain bool
+	//for x := 0; x < 10; x++ {
+	//	for y := 0; y < 10; y++ {
+	//		if y == 2 {
+	//			breakAgain = true
+	//			break
+	//		}
+	//	}
+	//	if breakAgain {
+	//		break
+	//	}
+	//}
+	//fmt.Println("done")
+
+	//	//使用goto处理错误
+	//	for x := 0; x < 10; x++ {
+	//		for y := 0; y < 10; y++ {
+	//			if y == 2 {
+	//				goto breakHear
+	//			}
+	//		}
+	//	}
+	//	return
+	//breakHear:
+	//	fmt.Println("donbe")
+
+	////将函数作为变量
+	//var f func()
+	//f= chengfa99biao
+	//f()
+
+	////匿名函数
+	//visit([]int{1,2,3,4}, func(v int) {
+	//	fmt.Println(v)
+	//})
+
+	//in := Data1{
+	//	complex: []int{1, 2, 3},
+	//	instance: InnerData{
+	//		5,
+	//	},
+	//	prt: &InnerData{1},
+	//}
+	//
+	//fmt.Printf("in value：%+v\n", in)
+	//
+	//fmt.Printf("in ptr: %p\n", &in)
+	//
+	//out := passByValue(in)
+	//fmt.Printf("out value:  %+v\n", out)
+	//
+	//fmt.Printf("out ptr:  %p\n", &out)
+
+	//函数定义
+	fmt.Println(resolveTime(25221511))
+
+}
+
+const (
+	SecondsPerMinute = 60
+	SecondsPerHour   = SecondsPerMinute * 60
+	SecondsPerDay    = SecondsPerHour * 60
+)
+
+func resolveTime(seconds int) (day, hour, minute int) {
+
+	day = seconds / SecondsPerDay
+	hour = seconds / SecondsPerHour
+	minute = seconds / SecondsPerMinute
+	return
+}
+
+func passByValue(inFunc Data1) Data1 {
+
+	fmt.Printf("inFunc value: %+v\n", inFunc)
+
+	fmt.Printf("inFunc ptr: %p\n", &inFunc)
+
+	return inFunc
+}
+
+type Data1 struct {
+	complex  []int
+	instance InnerData
+	prt      *InnerData
+}
+
+type InnerData struct {
+	a int
+}
+
+func visit(list []int, f func(int)) {
+	for _, v := range list {
+		f(v)
+	}
+}
+
+//九九乘法表
+func chengfa99biao() {
+
+	for x := 1; x < 10; x++ {
+		for y := 1; y <= x; y++ {
+			fmt.Print(x * y)
+			fmt.Print(" ")
+		}
+		fmt.Println()
+
+	}
 
 }
 
