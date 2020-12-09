@@ -68,6 +68,7 @@ func main() {
 
 	//切片（和数组的区别就是不设置长度）
 	//切片的本质，框柱了一块连续的内存,真正的数据是保存在底层数组里的
+	//切片是一个引用类型，不保存值，值是底层数组决定的
 	//一个nil的切片是没有底层数组的
 	//定义一个切片
 	//var s1 []int
@@ -85,10 +86,64 @@ func main() {
 	//fmt.Println(s5,len(s5),cap(s5))
 	//fmt.Println(s6,len(s6),cap(s6))
 
-	//用make构造切片
-	sn := make([]int, 5, 15)
-	sn[1] = 21
-	fmt.Println(sn, len(sn), cap(sn))
+	////用make构造切片
+	//sn := make([]int, 5, 15)
+	//sn[1] = 21
+	//fmt.Println(sn, len(sn), cap(sn))
+
+	//切片扩容 append,append操作会改变底层数组
+	//s1 := []string{"北京","shanghai","shenzhen","guangzhou","guangzhou"}
+	//fmt.Println(s1,len(s1),cap(s1))
+	////扩容时原有数组容量会翻倍！！！
+	//s1 = append(s1, "guangzhou")
+	//fmt.Println(s1,len(s1),cap(s1))
+
+	////-------注意！！！！！！！！
+	////必须要用变量接收append参数的返回值
+	//s1 := make([]int,5,10)
+	//s1 = append(s1, 1,52,47,6578,248,1475,13687,1347,521,852,45,81)
+	//sort.Ints(s1)
+	//fmt.Println(s1,len(s1),cap(s1))
+	////此处修改了底层数组，数值发生了平移
+	//s2:= append(s1[0:8],s1[10:]...)
+	//fmt.Println(s1,len(s1),cap(s1))
+	//fmt.Println(s2,len(s2),cap(s2))
+	// ... 相当于拆开前面变量中的元素
+	////copy
+	//a1 := []int{1, 2, 3}
+	//a2 := a1
+	//var a3 = make([]int, 3, 3)
+	//copy(a3,a1)
+	//fmt.Println(a1,a2,a3)
+	//a1[0] = 100
+	//fmt.Println(a1,a2,a3)
+
+	////指针
+	////go语言中不存在指针操作
+	//c:="按时打发"
+	//p:=&c
+	//fmt.Printf("p的类型 %T \n",p)
+	//fmt.Println(p)
+	//fmt.Println(*p)
+
+	////new 申请内存空间,一般用于给基本数据类型申请内存
+	//var a = new(int) //a是指针
+	//*a = 1000
+	//fmt.Println(a)
+	//fmt.Println(*a)
+	//
+	////make 也是分配类型的 只作用于 slice map chan
+	//arr := make([]int, 3, 10)
+	//fmt.Println(arr)
+
+	//  map 内部以hash实现
+	var m map[string]int
+	fmt.Println(m == nil)
+	m = make(map[string]int, 5)
+	m["a"] = 1
+	m["b"] = 2
+	fmt.Println(m)
+	fmt.Println(m["c"])
 
 	/**
 	变量交换，跨文件访问变量
@@ -532,10 +587,6 @@ func main() {
 	//c2 := '唐'
 	//c3 := rune('糖')
 	//fmt.Printf("%T \n %T \n %T \n",c1,c2,c3)
-
-	var a [3]bool
-	var b [4]bool
-	fmt.Println(a, b)
 
 }
 
