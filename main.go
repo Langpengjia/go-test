@@ -2,6 +2,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"image"
 	"image/color"
@@ -9,12 +10,85 @@ import (
 	"log"
 	"math"
 	"os"
+	"runtime"
+	"strings"
 )
 
-type Data struct {
-}
-
 func main() {
+
+	//数组是值类型
+
+	//数组一般声明
+	//a1 := [3]bool{true, true, true}
+	//fmt.Println(a1)
+	////根据初始值自动推断数组的长度
+	//a100 := [...]int{1, 4, 15, 24, 51, 55}
+	//fmt.Println(a100)
+	//a2 := [5]int{1,2}
+	//fmt.Println(a2)
+	////根据索引指定数组的值
+	//an := [5]int{1,4:2}
+	//fmt.Println(an)
+
+	////数组的遍历
+	////1
+	//citys := [...]string{"北京","上海","广州"}
+	//for i := 0; i < len(citys); i++ {
+	//	fmt.Println(citys[i])
+	//}
+	////2
+	//for i,v:=range citys{
+	//	fmt.Println(i,v)
+	//}
+
+	//多维数组
+	//var aii [3][3]int
+	//fmt.Println(aii)
+	//ss := [3][2]int{
+	//	[2]int{0,1},
+	//	[2]int{0,1},
+	//	[2]int{0,1},
+	//}
+	//fmt.Println(ss)
+
+	//b1 := [3]int{1,2,3}
+	//b2 := b1
+	//b2[2] = 100
+	//fmt.Println(b1,b2)
+
+	////练习
+	//arr := &[15]int{0,1,2,3,4,5,6,7,8,9,1,0,5,65,74}
+	//sumd := sumArr(arr)
+	//fmt.Printf("数组和为 %v \n",sumd)
+	//findArrSum(5,arr)
+
+	//数组局限性
+	//数组的类型包括数组元素的类型和数组的长度
+	//数组作为参数时收到数组长度的约束
+
+	//切片（和数组的区别就是不设置长度）
+	//切片的本质，框柱了一块连续的内存,真正的数据是保存在底层数组里的
+	//一个nil的切片是没有底层数组的
+	//定义一个切片
+	//var s1 []int
+	//var s2 []string
+	//fmt.Printf("s1的类型为：%T ，s2的类型为: %T",s1,s2)
+
+	//s3:=[]int{1,2,3,4,5,6,7,8,9,10}
+	//fmt.Println(cap(s3))
+	//s4 := s3[1:3]
+	//s5:= s3[6:]
+	//s6:= s4[:2]
+	//s6[0] = 10086
+	//fmt.Println(s3,len(s3),cap(s3))
+	//fmt.Println(s4,len(s4),cap(s4))
+	//fmt.Println(s5,len(s5),cap(s5))
+	//fmt.Println(s6,len(s6),cap(s6))
+
+	//用make构造切片
+	sn := make([]int, 5, 15)
+	sn[1] = 21
+	fmt.Println(sn, len(sn), cap(sn))
 
 	/**
 	变量交换，跨文件访问变量
@@ -345,6 +419,8 @@ func main() {
 	//	prt: &InnerData{1},
 	//}
 	//
+
+	////函数中参数传递效果测试
 	//fmt.Printf("in value：%+v\n", in)
 	//
 	//fmt.Printf("in ptr: %p\n", &in)
@@ -354,16 +430,283 @@ func main() {
 	//
 	//fmt.Printf("out ptr:  %p\n", &out)
 
-	//函数定义
-	fmt.Println(resolveTime(25221511))
+	////函数定义
+	//fmt.Println(resolveTime(25221511))
+	//
+	//_,hour,minute := resolveTime(10036)
+	//
+	//fmt.Println(hour,minute)
+
+	////字符串处理链函数
+	//list := []string{
+	//	"go root",
+	//	"go path",
+	//	"deadman must be destroyed",
+	//	"go through",
+	//	"heil Hitler!",
+	//}
+	//
+	//chain := []func(string) string{
+	//	removePrefix,
+	//	strings.TrimSpace,
+	//	strings.ToUpper,
+	//	strings.ToTitle,
+	//}
+	////处理字符串
+	//StringProcess(list, chain)
+	////输出处理完的字符串
+	//for _, str := range list {
+	//	fmt.Println(str)
+	//}
+
+	//匿名函数（匿名函数可以在声明后调用）
+	//d:= func(data int) int{
+	//	fmt.Println("hello",data)
+	//	return data * 10
+	//}(100)
+	//fmt.Println(d)
+	//f := func(a string){
+	//	fmt.Println("this is the letter",a)
+	//}
+	//f("s")
+
+	////使用匿名函数实现操作封装
+	//generator := playerGen("high noon!")
+	//name, hp := generator()
+	//fmt.Println(name, hp)
+
+	//可变参数--参数不固定的函数形式
+	//func m(s ... interface()) return { ... }
+
+	////遍历可变参数列表
+	//f := joinStrings("a","b","c","d","e","f")
+	//fmt.Println(f)
+
+	////延迟执行语句-- defer
+	//defer fmt.Println(1)
+	//defer fmt.Println(2)
+	//defer fmt.Println(3)
+
+	//使用延迟执行语句在函数退出时释放资源
+
+	////自定义错误
+	//var err = errors.New("这是我的自定义错误")
+	//fmt.Println(err)
+
+	////宕机
+	//panic("crash")
+
+	////从宕机中恢复
+	//fmt.Println("运行前")
+	//
+	//ProtectRun(func() {
+	//	fmt.Println("手动宕机前")
+	//	//使用panic传递上下文
+	//	panic(&panicContext{
+	//		"手动触发panic",
+	//	})
+	//	fmt.Println("手动宕机后")
+	//})
+	////故意造成空指针异常
+	//ProtectRun(func() {
+	//	fmt.Println("赋值宕机前")
+	//	var a *int
+	//	*a = 1
+	//	fmt.Println("赋值宕机后")
+	//})
+	//fmt.Println("运行后")
+
+	////结构体
+	//cat := newCatByName("喵喵喵")
+	//fmt.Println(cat)
+
+	//fmt.Println(fof, asd, asdwg, adtesg,sss,asdw)
+	//fmt.Println(a1,a2,a3,a4,a5)
+
+	//a := "赵客缦胡缨"
+	//as := []rune(a)
+	//as[0] = '唐'
+	//fmt.Println(string(as))
+	//
+	//c1 := "唐"
+	//c2 := '唐'
+	//c3 := rune('糖')
+	//fmt.Printf("%T \n %T \n %T \n",c1,c2,c3)
+
+	var a [3]bool
+	var b [4]bool
+	fmt.Println(a, b)
 
 }
 
+//数组求和
+func sumArr(arr *[15]int) int {
+	var i int
+	for _, v := range *arr {
+		i += v
+	}
+	return i
+}
+
+//找出数组中和为指定值的两个数组元素的下标
+func findArrSum(target int, arr *[15]int) {
+	for i := 0; i < len(*arr); i++ {
+		for j := i + 1; j < len(*arr); j++ {
+			if target == arr[i]+arr[j] {
+				fmt.Print(arr[i], arr[j], " :")
+				fmt.Println(i, j)
+			}
+		}
+	}
+}
+
+const (
+	fof, coc = iota, iota
+	assss    = iota
+	sss      = 85174
+	asdw     = iota
+)
+
+const (
+	a1 = iota
+	a2
+	a3
+	a4 = 10086
+	a5
+)
+
+//结构体demo--二维矢量模拟玩家移动
+//实现二维矢量解构
+type Vec2 struct {
+	X, Y float32
+}
+
+//矢量加法
+func (v Vec2) add(other Vec2) Vec2 {
+	return Vec2{
+		v.X + other.X,
+		v.Y + other.Y,
+	}
+}
+
+//矢量减法
+func (v Vec2) minus(other Vec2) Vec2 {
+	return Vec2{
+		v.X - other.X,
+		v.Y - other.Y,
+	}
+}
+
+//矢量相乘
+func (v Vec2) scale(s float32) Vec2 {
+	return Vec2{v.X * s, v.Y * s}
+}
+
+//计算两个矢量的距离
+func (v Vec2) DistanceTo(other Vec2) float32 {
+	dx := v.X - other.X
+	dy := v.Y - other.Y
+	return float32(math.Sqrt(float64(dx*dx + dy + dy)))
+}
+
+//
+
+//结构体
+type Cat struct {
+	Color string
+	Name  string
+}
+
+func newCatByName(name string) *Cat {
+	return &Cat{
+		Name: name,
+	}
+}
+
+func newCatByColor(color string) *Cat {
+	return &Cat{
+		Color: color,
+	}
+}
+
+//panic时需要传递的上下文信息
+type panicContext struct {
+	function string
+}
+
+//保护方式允许一个函数
+func ProtectRun(entry func()) {
+	defer func() {
+		err := recover()
+		switch err.(type) {
+		case runtime.Error:
+			fmt.Println("runtime error: ", err)
+		default:
+			fmt.Println("error:", err)
+		}
+	}()
+	entry()
+}
+
+////使用延迟执行语句在函数退出时释放资源.
+//
+//var(
+//	valueByKey = make(map[string]int)
+//	valueByKeyGuard sync.Mutex
+//)
+//func readValue(key string)int{
+//	valueByKeyGuard.Lock()
+//	v := valueByKey(key)
+//	valueByKeyGuard.Unlock()
+//	return v
+//}
+
+//遍历可变参数列表
+func joinStrings(slist ...string) string {
+
+	//定义一个字节缓冲，快速地连接字符串
+	var b bytes.Buffer
+
+	for _, s := range slist {
+		b.WriteString(s)
+	}
+	return b.String()
+}
+
+func playerGen(name string) func() (string, int) {
+	hp := 150
+	return func() (string, int) {
+		return name, hp
+	}
+}
+
+//声明常量
 const (
 	SecondsPerMinute = 60
 	SecondsPerHour   = SecondsPerMinute * 60
 	SecondsPerDay    = SecondsPerHour * 60
 )
+
+var skillParam = "s"
+
+//函数作为参数
+func StringProcess(list []string, chain []func(string string) string) {
+	for index, str := range list {
+		//第一个需要处理的字符串
+		result := str
+		//遍历每一个处理链
+		for _, proc := range chain {
+			result = proc(result)
+		}
+		//将处理后的结果放回切片中
+		list[index] = result
+	}
+}
+
+//自定义处理函数
+func removePrefix(str string) string {
+	return strings.TrimPrefix(str, "go")
+}
 
 func resolveTime(seconds int) (day, hour, minute int) {
 
@@ -450,8 +793,7 @@ func (c ChipType) String() string {
 type newInt int
 type intAlias = int
 
-func void() {
-
+type Data struct {
 }
 
 func dummy1() *Data {
