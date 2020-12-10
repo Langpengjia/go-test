@@ -12,6 +12,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"unicode"
 )
 
 func main() {
@@ -136,14 +137,44 @@ func main() {
 	//arr := make([]int, 3, 10)
 	//fmt.Println(arr)
 
-	//  map 内部以hash实现
-	var m map[string]int
-	fmt.Println(m == nil)
-	m = make(map[string]int, 5)
-	m["a"] = 1
-	m["b"] = 2
-	fmt.Println(m)
-	fmt.Println(m["c"])
+	////  map 内部以hash实现
+	//var m map[string]int
+	//fmt.Println(m == nil)
+	//m = make(map[string]int, 5)
+	//m["a"] = 1
+	//m["b"] = 2
+	//fmt.Println(m)
+	//v,ok := m["c"]
+	//if ok{
+	//	fmt.Println(v)
+	//}
+	//delete(m,"a")
+	//
+	//
+	//m["sou"] = 214
+	//m["asda"] = 241
+	//fmt.Println(m)
+	//fmt.Println(len(m))
+	//for k,v :=range m{
+	//	fmt.Println(k,v)
+	//}
+
+	////判断字符中汉子的长度
+	//s:="asdadcvs赵姐阿萨法wang史蒂夫"
+	//fmt.Println(calsChinese(s))
+
+	////判断回文数
+	//s1 := "上海自来水来自海上"
+	//s2 := "asdafswfa"
+	//fmt.Println(huiwen(s1))
+	//fmt.Println(huiwen(s2))
+
+	//函数的作用域
+	//函数中变量先在内部查找（局部变量）
+	//内部找不到就去外层查找，一直找到全局为止
+
+	f := f2(1)(1, 2, 3)
+	fmt.Println(f)
 
 	/**
 	变量交换，跨文件访问变量
@@ -588,6 +619,46 @@ func main() {
 	//c3 := rune('糖')
 	//fmt.Printf("%T \n %T \n %T \n",c1,c2,c3)
 
+}
+
+func f1(x, y, z int) int {
+	return x + y + z
+}
+
+func f2(x int) func(int, int, int) int {
+	fmt.Println(x)
+	return f1
+}
+
+//求字符串中汉子的长度
+func calsChinese(s string) int {
+	i := 0
+	for _, ss := range s {
+		if unicode.Is(unicode.Han, ss) {
+			i++
+		}
+	}
+	return i
+}
+
+//回文判断
+func huiwen(s string) bool {
+	var r []rune
+	i := 0
+
+	for _, k := range s {
+		r = append(r, k)
+	}
+	j := len(r) - i - 1
+
+	for j > i {
+		if r[i] != r[j] {
+			return false
+		}
+		i++
+		j--
+	}
+	return true
 }
 
 //数组求和
