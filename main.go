@@ -12,10 +12,23 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"time"
 	"unicode"
 )
 
 func main() {
+	////处理科学计数法
+	//var(
+	//	old = "1.000002e+09"
+	//	f float64
+	//)
+	//n,err := fmt.Sscanf(old,"%e",&f)
+	//if err != nil{
+	//	fmt.Println(err)
+	//}else if 1!=n {
+	//	fmt.Println("n is not one !")
+	//}
+	//fmt.Println(uint64(f))
 
 	//数组是值类型
 
@@ -173,8 +186,21 @@ func main() {
 	//函数中变量先在内部查找（局部变量）
 	//内部找不到就去外层查找，一直找到全局为止
 
-	f := f2(1)(1, 2, 3)
-	fmt.Println(f)
+	//f := f2(1)(1, 2, 3)
+	//fmt.Println(f)
+
+	//x,y:=f3(0)
+	//fmt.Println(x,y)
+	////函数定义
+	//c:= func(x int) {
+	//	tmp := func() {
+	//		fmt.Println(x)
+	//	}
+	//	tmp()
+	//}
+
+	//闭包
+	//c()
 
 	/**
 	变量交换，跨文件访问变量
@@ -348,6 +374,8 @@ func main() {
 	//	c = &a
 	//	d = &b
 	//)
+
+	deferPanic()
 
 	//枚举，用其他方式替代
 	//fmt.Printf("%s  %d",CPU,CPU)
@@ -621,6 +649,34 @@ func main() {
 
 }
 
+//宕机操作
+//延时加载
+func deferPanic() {
+
+	fmt.Println("开始执行操作----")
+	time.Sleep(time.Second)
+	fmt.Println("函数执行中------")
+	time.Sleep(time.Second * 2)
+	defer fmt.Println("延时操作1-----")
+	defer fmt.Println("延时操作2-----")
+	fmt.Println("函数执行结束-----")
+
+}
+
+//闭包
+func bibao(x int, y int) func() {
+	return func() {
+		fmt.Println(x, y)
+	}
+}
+func c() {
+	f1 := bibao(1, 2)
+	demo1(f1)
+}
+func demo1(f func()) {
+	f()
+}
+
 func f1(x, y, z int) int {
 	return x + y + z
 }
@@ -628,6 +684,12 @@ func f1(x, y, z int) int {
 func f2(x int) func(int, int, int) int {
 	fmt.Println(x)
 	return f1
+}
+
+func f3(z int) (x, y int) {
+	x = 5
+	y = z + 1
+	return
 }
 
 //求字符串中汉子的长度
