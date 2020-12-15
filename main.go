@@ -2,7 +2,6 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"image"
 	"image/color"
@@ -10,141 +9,10 @@ import (
 	"log"
 	"math"
 	"os"
-	"runtime"
-	"strings"
-	"time"
-	"unicode"
 )
 
 func main() {
-	////处理科学计数法
-	//var(
-	//	old = "1.000002e+09"
-	//	f float64
-	//)
-	//n,err := fmt.Sscanf(old,"%e",&f)
-	//if err != nil{
-	//	fmt.Println(err)
-	//}else if 1!=n {
-	//	fmt.Println("n is not one !")
-	//}
-	//fmt.Println(uint64(f))
 
-	//数组是值类型
-
-	//数组一般声明
-	//a1 := [3]bool{true, true, true}
-	//fmt.Println(a1)
-	////根据初始值自动推断数组的长度
-	//a100 := [...]int{1, 4, 15, 24, 51, 55}
-	//fmt.Println(a100)
-	//a2 := [5]int{1,2}
-	//fmt.Println(a2)
-	////根据索引指定数组的值
-	//an := [5]int{1,4:2}
-	//fmt.Println(an)
-
-	////数组的遍历
-	////1
-	//citys := [...]string{"北京","上海","广州"}
-	//for i := 0; i < len(citys); i++ {
-	//	fmt.Println(citys[i])
-	//}
-	////2
-	//for i,v:=range citys{
-	//	fmt.Println(i,v)
-	//}
-
-	//多维数组
-	//var aii [3][3]int
-	//fmt.Println(aii)
-	//ss := [3][2]int{
-	//	[2]int{0,1},
-	//	[2]int{0,1},
-	//	[2]int{0,1},
-	//}
-	//fmt.Println(ss)
-
-	//b1 := [3]int{1,2,3}
-	//b2 := b1
-	//b2[2] = 100
-	//fmt.Println(b1,b2)
-
-	////练习
-	//arr := &[15]int{0,1,2,3,4,5,6,7,8,9,1,0,5,65,74}
-	//sumd := sumArr(arr)
-	//fmt.Printf("数组和为 %v \n",sumd)
-	//findArrSum(5,arr)
-
-	//数组局限性
-	//数组的类型包括数组元素的类型和数组的长度
-	//数组作为参数时收到数组长度的约束
-
-	//切片（和数组的区别就是不设置长度）
-	//切片的本质，框柱了一块连续的内存,真正的数据是保存在底层数组里的
-	//切片是一个引用类型，不保存值，值是底层数组决定的
-	//一个nil的切片是没有底层数组的
-	//定义一个切片
-	//var s1 []int
-	//var s2 []string
-	//fmt.Printf("s1的类型为：%T ，s2的类型为: %T",s1,s2)
-
-	//s3:=[]int{1,2,3,4,5,6,7,8,9,10}
-	//fmt.Println(cap(s3))
-	//s4 := s3[1:3]
-	//s5:= s3[6:]
-	//s6:= s4[:2]
-	//s6[0] = 10086
-	//fmt.Println(s3,len(s3),cap(s3))
-	//fmt.Println(s4,len(s4),cap(s4))
-	//fmt.Println(s5,len(s5),cap(s5))
-	//fmt.Println(s6,len(s6),cap(s6))
-
-	////用make构造切片
-	//sn := make([]int, 5, 15)
-	//sn[1] = 21
-	//fmt.Println(sn, len(sn), cap(sn))
-
-	//切片扩容 append,append操作会改变底层数组
-	//s1 := []string{"北京","shanghai","shenzhen","guangzhou","guangzhou"}
-	//fmt.Println(s1,len(s1),cap(s1))
-	////扩容时原有数组容量会翻倍！！！
-	//s1 = append(s1, "guangzhou")
-	//fmt.Println(s1,len(s1),cap(s1))
-
-	////-------注意！！！！！！！！
-	////必须要用变量接收append参数的返回值
-	//s1 := make([]int,5,10)
-	//s1 = append(s1, 1,52,47,6578,248,1475,13687,1347,521,852,45,81)
-	//sort.Ints(s1)
-	//fmt.Println(s1,len(s1),cap(s1))
-	////此处修改了底层数组，数值发生了平移
-	//s2:= append(s1[0:8],s1[10:]...)
-	//fmt.Println(s1,len(s1),cap(s1))
-	//fmt.Println(s2,len(s2),cap(s2))
-	// ... 相当于拆开前面变量中的元素
-	////copy
-	//a1 := []int{1, 2, 3}
-	//a2 := a1
-	//var a3 = make([]int, 3, 3)
-	//copy(a3,a1)
-	//fmt.Println(a1,a2,a3)
-	//a1[0] = 100
-	//fmt.Println(a1,a2,a3)
-
-	////指针
-	////go语言中不存在指针操作
-	//c:="按时打发"
-	//p:=&c
-	//fmt.Printf("p的类型 %T \n",p)
-	//fmt.Println(p)
-	//fmt.Println(*p)
-
-	////new 申请内存空间,一般用于给基本数据类型申请内存
-	//var a = new(int) //a是指针
-	//*a = 1000
-	//fmt.Println(a)
-	//fmt.Println(*a)
 	//
 	////make 也是分配类型的 只作用于 slice map chan
 	//arr := make([]int, 3, 10)
@@ -182,10 +50,6 @@ func main() {
 	//fmt.Println(huiwen(s1))
 	//fmt.Println(huiwen(s2))
 
-	//函数的作用域
-	//函数中变量先在内部查找（局部变量）
-	//内部找不到就去外层查找，一直找到全局为止
-
 	//f := f2(1)(1, 2, 3)
 	//fmt.Println(f)
 
@@ -198,9 +62,6 @@ func main() {
 	//	}
 	//	tmp()
 	//}
-
-	//闭包
-	//c()
 
 	/**
 	变量交换，跨文件访问变量
@@ -224,70 +85,13 @@ func main() {
 	*/
 	//http.Handle("/", http.FileServer(http.Dir(".")))
 	//http.ListenAndServe(":8111", nil)
-	/**
-	一个简单的demo
-	*/
-	//var a, b, c int = 1, 2, 3
-	//fmt.Println(a)
-	//go log(b)
-	//fmt.Println(c)
-	//
-	//fmt.Println("Hello World!")
 
 	/**
 	demo2 输出一个正弦函数
 	*/
 	//makeSin()
-	/**
-	符号引用,无视转义
-	*/
-	//s := `
-	//	第一行
-	//	第二行
-	//	第三行
-	//	第四行
-	//	/n/t/f/s`
-	//fmt.Println(s)
-	/**
-	转换不同的数据类型
-	*/
-	//fmt.Println(" int8 ranges:",math.MinInt8,math.MaxInt8)
-	//fmt.Println(" int16 ranges:",math.MinInt16,math.MaxInt16)
-	//fmt.Println(" int32 ranges:",math.MinInt32,math.MaxInt32)
-	//fmt.Println(" int64 ranges:",math.MinInt64,math.MaxInt64)
-	//var a int32 = 1047483674
-	//fmt.Printf("int32: 0x%x %d\n",a,a)
-	//b := int16(a)
-	//fmt.Printf("int16: 0x%x %d\n",b,b)
-	//var c float32 = math.Pi
-	//fmt.Println(int(c))
-	/**
-	指针
-	*/
-	//var cat = 1
-	//var str = "banana"
-	//fmt.Printf("%p  %p  ",&cat,&str)
-	/**
-	从指针获取指针指向的值
-	*/
-	//var str = "time is money"
-	//point := &str
-	//fmt.Println(point)
-	//fmt.Println(*point)
-	/**
-	使用指针获取命令行输入信息（flag包）
-	*/
-	//var mode = flag.String("mode","","process mode")
-	////解析命令行
-	//flag.Parse()
-	//fmt.Println(*mode)
-	/**
-	用new()函数创建指针
-	*/
-	//str := new(string)
-	//*str = "ninjia"
-	//fmt.Println(*str)
 
+	/**
 	/**
 	变量和栈
 	*/
@@ -375,8 +179,6 @@ func main() {
 	//	d = &b
 	//)
 
-	deferPanic()
-
 	//枚举，用其他方式替代
 	//fmt.Printf("%s  %d",CPU,CPU)
 	//fmt.Printf("%s  %d",GPU,GPU)
@@ -396,43 +198,6 @@ func main() {
 	//	f := ta.Field(i)
 	//	fmt.Println("FieldName :  %v, FieldType: %v\n",f.Name,f.Type.Name())
 	//}
-
-	////数组
-	//var team = [3]int{1,2,3}
-	//for i := 0; i < len(team); i++ {
-	//	fmt.Println(team)
-	//}
-
-	////切片复制元素
-	//const elementCount = 1000
-	//srcData := make([]int, elementCount)
-	//
-	////将切片赋值
-	//for i := 0; i < elementCount; i++ {
-	//	srcData[i] = i
-	//}
-
-	////引用切片数据,复制切片数据
-	//refData := srcData
-	//
-	//copyData := make([]int,elementCount)
-	//
-	//copy(copyData,srcData)
-	//
-	//srcData[0] = 999
-	//
-	//fmt.Println(refData[0])
-	//
-	//fmt.Println(copyData[0],copyData[elementCount-1])
-	//
-	//copy(copyData,srcData[4:6])
-	//
-	//for i := 0; i < 5; i++ {
-	//	fmt.Printf("%d",copyData[i])
-	//}
-
-	////99乘法表
-	//chengfa99biao()
 
 	////遍历字符串
 	//str:= "无名以观其妙，有名以观其徼"
@@ -488,148 +253,6 @@ func main() {
 	//	fmt.Println("world")
 	//}
 
-	////跳转到指定代码标签（goto）
-	//var breakAgain bool
-	//for x := 0; x < 10; x++ {
-	//	for y := 0; y < 10; y++ {
-	//		if y == 2 {
-	//			breakAgain = true
-	//			break
-	//		}
-	//	}
-	//	if breakAgain {
-	//		break
-	//	}
-	//}
-	//fmt.Println("done")
-
-	//	//使用goto处理错误
-	//	for x := 0; x < 10; x++ {
-	//		for y := 0; y < 10; y++ {
-	//			if y == 2 {
-	//				goto breakHear
-	//			}
-	//		}
-	//	}
-	//	return
-	//breakHear:
-	//	fmt.Println("donbe")
-
-	////将函数作为变量
-	//var f func()
-	//f= chengfa99biao
-	//f()
-
-	////匿名函数
-	//visit([]int{1,2,3,4}, func(v int) {
-	//	fmt.Println(v)
-	//})
-
-	//in := Data1{
-	//	complex: []int{1, 2, 3},
-	//	instance: InnerData{
-	//		5,
-	//	},
-	//	prt: &InnerData{1},
-	//}
-	//
-
-	////函数中参数传递效果测试
-	//fmt.Printf("in value：%+v\n", in)
-	//
-	//fmt.Printf("in ptr: %p\n", &in)
-	//
-	//out := passByValue(in)
-	//fmt.Printf("out value:  %+v\n", out)
-	//
-	//fmt.Printf("out ptr:  %p\n", &out)
-
-	////函数定义
-	//fmt.Println(resolveTime(25221511))
-	//
-	//_,hour,minute := resolveTime(10036)
-	//
-	//fmt.Println(hour,minute)
-
-	////字符串处理链函数
-	//list := []string{
-	//	"go root",
-	//	"go path",
-	//	"deadman must be destroyed",
-	//	"go through",
-	//	"heil Hitler!",
-	//}
-	//
-	//chain := []func(string) string{
-	//	removePrefix,
-	//	strings.TrimSpace,
-	//	strings.ToUpper,
-	//	strings.ToTitle,
-	//}
-	////处理字符串
-	//StringProcess(list, chain)
-	////输出处理完的字符串
-	//for _, str := range list {
-	//	fmt.Println(str)
-	//}
-
-	//匿名函数（匿名函数可以在声明后调用）
-	//d:= func(data int) int{
-	//	fmt.Println("hello",data)
-	//	return data * 10
-	//}(100)
-	//fmt.Println(d)
-	//f := func(a string){
-	//	fmt.Println("this is the letter",a)
-	//}
-	//f("s")
-
-	////使用匿名函数实现操作封装
-	//generator := playerGen("high noon!")
-	//name, hp := generator()
-	//fmt.Println(name, hp)
-
-	//可变参数--参数不固定的函数形式
-	//func m(s ... interface()) return { ... }
-
-	////遍历可变参数列表
-	//f := joinStrings("a","b","c","d","e","f")
-	//fmt.Println(f)
-
-	////延迟执行语句-- defer
-	//defer fmt.Println(1)
-	//defer fmt.Println(2)
-	//defer fmt.Println(3)
-
-	//使用延迟执行语句在函数退出时释放资源
-
-	////自定义错误
-	//var err = errors.New("这是我的自定义错误")
-	//fmt.Println(err)
-
-	////宕机
-	//panic("crash")
-
-	////从宕机中恢复
-	//fmt.Println("运行前")
-	//
-	//ProtectRun(func() {
-	//	fmt.Println("手动宕机前")
-	//	//使用panic传递上下文
-	//	panic(&panicContext{
-	//		"手动触发panic",
-	//	})
-	//	fmt.Println("手动宕机后")
-	//})
-	////故意造成空指针异常
-	//ProtectRun(func() {
-	//	fmt.Println("赋值宕机前")
-	//	var a *int
-	//	*a = 1
-	//	fmt.Println("赋值宕机后")
-	//})
-	//fmt.Println("运行后")
-
 	////结构体
 	//cat := newCatByName("喵喵喵")
 	//fmt.Println(cat)
@@ -648,116 +271,6 @@ func main() {
 	//fmt.Printf("%T \n %T \n %T \n",c1,c2,c3)
 
 }
-
-//宕机操作
-//延时加载
-func deferPanic() {
-
-	fmt.Println("开始执行操作----")
-	time.Sleep(time.Second)
-	fmt.Println("函数执行中------")
-	time.Sleep(time.Second * 2)
-	defer fmt.Println("延时操作1-----")
-	defer fmt.Println("延时操作2-----")
-	fmt.Println("函数执行结束-----")
-
-}
-
-//闭包
-func bibao(x int, y int) func() {
-	return func() {
-		fmt.Println(x, y)
-	}
-}
-func c() {
-	f1 := bibao(1, 2)
-	demo1(f1)
-}
-func demo1(f func()) {
-	f()
-}
-
-func f1(x, y, z int) int {
-	return x + y + z
-}
-
-func f2(x int) func(int, int, int) int {
-	fmt.Println(x)
-	return f1
-}
-
-func f3(z int) (x, y int) {
-	x = 5
-	y = z + 1
-	return
-}
-
-//求字符串中汉子的长度
-func calsChinese(s string) int {
-	i := 0
-	for _, ss := range s {
-		if unicode.Is(unicode.Han, ss) {
-			i++
-		}
-	}
-	return i
-}
-
-//回文判断
-func huiwen(s string) bool {
-	var r []rune
-	i := 0
-
-	for _, k := range s {
-		r = append(r, k)
-	}
-	j := len(r) - i - 1
-
-	for j > i {
-		if r[i] != r[j] {
-			return false
-		}
-		i++
-		j--
-	}
-	return true
-}
-
-//数组求和
-func sumArr(arr *[15]int) int {
-	var i int
-	for _, v := range *arr {
-		i += v
-	}
-	return i
-}
-
-//找出数组中和为指定值的两个数组元素的下标
-func findArrSum(target int, arr *[15]int) {
-	for i := 0; i < len(*arr); i++ {
-		for j := i + 1; j < len(*arr); j++ {
-			if target == arr[i]+arr[j] {
-				fmt.Print(arr[i], arr[j], " :")
-				fmt.Println(i, j)
-			}
-		}
-	}
-}
-
-const (
-	fof, coc = iota, iota
-	assss    = iota
-	sss      = 85174
-	asdw     = iota
-)
-
-const (
-	a1 = iota
-	a2
-	a3
-	a4 = 10086
-	a5
-)
 
 //结构体demo--二维矢量模拟玩家移动
 //实现二维矢量解构
@@ -818,97 +331,6 @@ type panicContext struct {
 	function string
 }
 
-//保护方式允许一个函数
-func ProtectRun(entry func()) {
-	defer func() {
-		err := recover()
-		switch err.(type) {
-		case runtime.Error:
-			fmt.Println("runtime error: ", err)
-		default:
-			fmt.Println("error:", err)
-		}
-	}()
-	entry()
-}
-
-////使用延迟执行语句在函数退出时释放资源.
-//
-//var(
-//	valueByKey = make(map[string]int)
-//	valueByKeyGuard sync.Mutex
-//)
-//func readValue(key string)int{
-//	valueByKeyGuard.Lock()
-//	v := valueByKey(key)
-//	valueByKeyGuard.Unlock()
-//	return v
-//}
-
-//遍历可变参数列表
-func joinStrings(slist ...string) string {
-
-	//定义一个字节缓冲，快速地连接字符串
-	var b bytes.Buffer
-
-	for _, s := range slist {
-		b.WriteString(s)
-	}
-	return b.String()
-}
-
-func playerGen(name string) func() (string, int) {
-	hp := 150
-	return func() (string, int) {
-		return name, hp
-	}
-}
-
-//声明常量
-const (
-	SecondsPerMinute = 60
-	SecondsPerHour   = SecondsPerMinute * 60
-	SecondsPerDay    = SecondsPerHour * 60
-)
-
-var skillParam = "s"
-
-//函数作为参数
-func StringProcess(list []string, chain []func(string string) string) {
-	for index, str := range list {
-		//第一个需要处理的字符串
-		result := str
-		//遍历每一个处理链
-		for _, proc := range chain {
-			result = proc(result)
-		}
-		//将处理后的结果放回切片中
-		list[index] = result
-	}
-}
-
-//自定义处理函数
-func removePrefix(str string) string {
-	return strings.TrimPrefix(str, "go")
-}
-
-func resolveTime(seconds int) (day, hour, minute int) {
-
-	day = seconds / SecondsPerDay
-	hour = seconds / SecondsPerHour
-	minute = seconds / SecondsPerMinute
-	return
-}
-
-func passByValue(inFunc Data1) Data1 {
-
-	fmt.Printf("inFunc value: %+v\n", inFunc)
-
-	fmt.Printf("inFunc ptr: %p\n", &inFunc)
-
-	return inFunc
-}
-
 type Data1 struct {
 	complex  []int
 	instance InnerData
@@ -923,20 +345,6 @@ func visit(list []int, f func(int)) {
 	for _, v := range list {
 		f(v)
 	}
-}
-
-//九九乘法表
-func chengfa99biao() {
-
-	for x := 1; x < 10; x++ {
-		for y := 1; y <= x; y++ {
-			fmt.Print(x * y)
-			fmt.Print(" ")
-		}
-		fmt.Println()
-
-	}
-
 }
 
 //在结构体成员嵌入时使用别名
