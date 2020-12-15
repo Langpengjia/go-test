@@ -1,4 +1,4 @@
-package main
+package function
 
 import (
 	"bytes"
@@ -51,6 +51,12 @@ func main() {
 	deferPanic()
 
 }
+
+const (
+	SecondsPerMinute = 60
+	SecondsPerHour   = SecondsPerMinute * 60
+	SecondsPerDay    = SecondsPerHour * 60
+)
 
 func resolveTime(seconds int) (day, hour, minute int) {
 	day = seconds / SecondsPerDay
@@ -180,6 +186,11 @@ func testPanic() {
 		fmt.Println("赋值宕机后")
 	})
 	fmt.Println("运行后")
+}
+
+//panic时需要传递的上下文信息
+type panicContext struct {
+	function string
 }
 
 //保护方式允许一个函数

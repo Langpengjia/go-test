@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"go-test/struct_"
 	"image"
 	"image/color"
 	"image/png"
@@ -12,8 +13,10 @@ import (
 )
 
 func main() {
+	fmt.Println("测试")
+	var d struct_.Person3
+	d.Wang()
 
-	//
 	////make 也是分配类型的 只作用于 slice map chan
 	//arr := make([]int, 3, 10)
 	//fmt.Println(arr)
@@ -69,10 +72,6 @@ func main() {
 	//var a string = "a"
 	//var b string = "b"
 	//var c string = "c"
-	//var d struct {
-	//	s string
-	//	x int
-	//}
 
 	//a,b = b,a
 	//a,b,c = c,a,b
@@ -324,11 +323,6 @@ func newCatByColor(color string) *Cat {
 	return &Cat{
 		Color: color,
 	}
-}
-
-//panic时需要传递的上下文信息
-type panicContext struct {
-	function string
 }
 
 type Data1 struct {

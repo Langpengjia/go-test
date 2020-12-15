@@ -1,4 +1,4 @@
-package main
+package basic
 
 import (
 	"fmt"
@@ -59,11 +59,6 @@ func main() {
 }
 
 const const1 = "这是一个常量"
-const (
-	SecondsPerMinute = 60
-	SecondsPerHour   = SecondsPerMinute * 60
-	SecondsPerDay    = SecondsPerHour * 60
-)
 
 //若常量未赋值，则跟随前一个常量的值
 const (
