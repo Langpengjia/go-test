@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-//声明一个结构体
+//Person1 声明一个结构体
 type Person1 struct {
 	name   string
 	age    int
@@ -23,7 +23,7 @@ type tes struct {
 	d int8
 }
 
-func test2() {
+func Test2() {
 
 	var p1 Person1
 	p1.name = "李雷"
@@ -73,18 +73,13 @@ func test2() {
 
 	m := make(map[string]*student)
 	stus := []student{
-		{name: "小王子", age: 18},
-		{name: "娜扎", age: 23},
-		{name: "大王八", age: 9000},
+		{name: "aaa", age: 18},
+		{name: "bbb", age: 23},
+		{name: "ccc", age: 9000},
 	}
-
 	for _, stu := range stus {
-		fmt.Println(&stu)
 		m[stu.name] = &stu
-		fmt.Println(m[stu.name])
-
 	}
-	fmt.Println(m)
 	for k, v := range m {
 		fmt.Println(k, "=>", v.name)
 	}

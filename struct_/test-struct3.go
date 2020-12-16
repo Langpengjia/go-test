@@ -11,10 +11,14 @@ type Person3 struct {
 
 //方法 --和函数有区别
 //func (p Person3) wang()  --- 无法被别的包调用
-func (p Person3) Wang() {
-	fmt.Println("人不如狗！！！")
+func (p *Person3) Wang() {
+	fmt.Println(p.name, p.age)
 }
 
+//--- 无法被别的包调用
+func (p Person3) wang() {
+	fmt.Println("人不如狗！！！")
+}
 func test3() {
 	p1 := newPersion("aaa", 11)
 	p2 := newPersion2("aaa", 22)
@@ -34,6 +38,12 @@ func newPersion(name string, age int) Person3 {
 }
 
 func newPersion2(name string, age int) *Person3 {
+	return &Person3{
+		name, age,
+	}
+}
+
+func NewPersion3(name string, age int) *Person3 {
 	return &Person3{
 		name, age,
 	}

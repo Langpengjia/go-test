@@ -13,9 +13,13 @@ import (
 )
 
 func main() {
-	fmt.Println("测试")
-	var d struct_.Person3
-	d.Wang()
+	//var d struct_.Person3
+	//d.Wang()
+	//
+	//p := struct_.NewPersion3("张嘉倪",18)
+	//p.Wang()
+
+	struct_.Test2()
 
 	////make 也是分配类型的 只作用于 slice map chan
 	//arr := make([]int, 3, 10)
