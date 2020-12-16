@@ -13,8 +13,8 @@ func (m myInt) hello() {
 	fmt.Println(m)
 	fmt.Println("我其实是一个 int ！")
 }
-func Test_type() {
+func test1() {
 
-	var i myInt = 55
+	i := myInt(100)
 	i.hello()
 }
