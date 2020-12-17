@@ -3,7 +3,6 @@ package main
 
 import (
 	"fmt"
-	"go-test/demo"
 	"image"
 	"image/color"
 	"image/png"
@@ -15,15 +14,6 @@ import (
 //此文件主要用于测试
 
 func main() {
-	stu1 := demo.NewStudent("a", 11, "male")
-	stu2 := demo.NewStudent("a", 12, "male")
-	stu3 := demo.NewStudent("c", 11, "male")
-	stu4 := demo.NewStudent("d", 11, "male")
-	stus := []*demo.Student{stu1, stu2, stu3, stu4}
-	fmt.Println(stus)
-	clazz := demo.Class("1", stus)
-
-	fmt.Println(clazz)
 
 }
 
